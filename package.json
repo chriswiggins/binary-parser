@@ -1,5 +1,5 @@
 {
-  "name": "binary-parser",
+  "name": "@chriswiggins/binary-parser",
   "version": "1.4.0",
   "description": "Blazing-fast binary parser builder",
   "main": "dist/binary_parser.js",
@@ -20,7 +20,8 @@
     "prepare": "npm run build"
   },
   "files": [
-    "dist/*.js"
+    "dist/*.js",
+    "dist/*.d.ts"
   ],
   "keywords": [
     "binary",
