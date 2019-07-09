@@ -5,8 +5,8 @@ import { Context } from './context';
 const aliasRegistry: { [key: string]: Parser } = {};
 const FUNCTION_PREFIX = '___parser_';
 
-interface ParserOptions {
-  length?: number | string | ((item: any) => number);
+export interface ParserOptions<T = any> {
+  length?: number | string | ((this: T, item: any) => number);
   assert?: number | string | ((item: number | string) => boolean);
   lengthInBytes?: number | string | ((item: any) => number);
   type?: string | Parser;
@@ -18,7 +18,7 @@ interface ParserOptions {
   defaultChoice?: string | Parser;
   zeroTerminated?: boolean;
   clone?: null;
-  stripNull?: null;
+  stripNull?: boolean;
   key?: null;
   tag?: string;
   offset?: number | string | ((item: any) => number);
@@ -702,7 +702,7 @@ export class Parser {
   }
 
   // Follow the parser chain till the root and start parsing from there
-  parse(buffer: Buffer) {
+  parse<T>(buffer: Buffer): T {
     if (!this.compiled) {
       this.compile();
     }
